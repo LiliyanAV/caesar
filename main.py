@@ -1,13 +1,13 @@
 class Caesar:
     def __init__(self, shift=13):
         self.shift = shift
-        self.alpha = [chr(x) for x in range(ord("a"), ord("z") + 1)]
+        self.alphabet = [chr(x) for x in range(ord("a"), ord("z") + 1)]
         self.size = ord("z") - ord("a") + 1
 
     def crypt_chr(self, ch):
         return (
             chr((ord(ch) - ord("a") + self.shift) % self.size + ord("a"))
-            if ch in self.alpha
+            if ch in self.alphabet
             else ch
         )
 
