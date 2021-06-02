@@ -2,7 +2,7 @@ class Caesar:
     def __init__(self, shift=13):
         self.shift = shift
         self.alphabet = [chr(x) for x in range(ord("a"), ord("z") + 1)]
-        self.size = ord("z") - ord("a") + 1
+        self.size = len(self.alphabet)
 
     def crypt_chr(self, ch):
         return (
