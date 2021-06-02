@@ -5,11 +5,15 @@ class Caesar:
         self.size = len(self.alphabet)
 
     def crypt_chr(self, ch):
-        return (
-            chr((ord(ch) - ord("a") + self.shift) % self.size + ord("a"))
-            if ch in self.alphabet
-            else ch
-        )
+        if ch not in self.alphabet:
+            return ch
+        return chr((ord(ch) - ord("a") + self.shift) % self.size + ord("a"))
+
+    #  return (
+    #      chr((ord(ch) - ord("a") + self.shift) % self.size + ord("a"))
+    #    if ch in self.alphabet
+    #  else ch
+    #  )
 
     def crypt(self, text):
         text.lower()
