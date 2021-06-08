@@ -26,4 +26,6 @@ class Caesar:
 if __name__ == "__main__":
     c = Caesar()
     print(c.crypt("b arf"))
-    print(c.crypt("aaaa"))
+    print(c.crypt("aa.a"))
+    print(c.crypt("aaa.)"))
+    print(c.crypt(".....//////nnnnn***"))
