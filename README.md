@@ -13,6 +13,7 @@ This project requires at least python 3.9 and other.
 > git clone https://github.com/Luchia04/caesar.git
 
 Install requirements:
-> cd src && pip install -r requirements.txt
 
-> cp app/.env.ci app/.env  # default environment variables
+> python3 -m venv .venv
+
+> pip install -r requirements.txt
