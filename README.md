@@ -8,6 +8,11 @@ You can use algorithm for crypting and encrypting message. Work of this based on
 # Installing on local machine
 
 ------------
+
+## Downloading the project
+
+------------
+
 This project requires at least python 3.9 and other.
 
 > mkdir caesar
@@ -20,7 +25,9 @@ This project requires at least python 3.9 and other.
 
 > python3 main.py
 
-Install requirements:
+## Install requirements:
+
+------------
 
 > python3 -m venv .venv
 
