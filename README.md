@@ -26,7 +26,7 @@ This project requires at least python 3.9 and other.
 
 > :arrow_right: python3 main.py
 
-## Install requirements:
+### Install requirements:
 
 ------------
 
@@ -39,3 +39,9 @@ This project requires at least python 3.9 and other.
 > :arrow_right: pip install -r requirements.txt
 
 > :arrow_right: python3 main.py
+
+### Using Test
+
+-------------
+
+> :arrow_right: pytest test_main.py
