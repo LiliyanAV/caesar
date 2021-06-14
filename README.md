@@ -51,3 +51,9 @@ This project requires at least python 3.9 and other.
 ------------
 
 > :arrow_right: pre-commit install
+
+### Run flake8
+
+----------
+
+> :arrow_right: flake8 main.py
