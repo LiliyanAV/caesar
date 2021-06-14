@@ -7,7 +7,7 @@
 ![](https://img.shields.io/twitter/url?url=https%3A%2F%2Fgithub.com%2FLuchia04%2Fcaesar%2Ftree%2Fdev)
 
 You can use algorithm for crypting and encrypting message. Work of this based on caesar cipher.
--------------
+
 # Installing on local machine
 
 ### Downloading the project
