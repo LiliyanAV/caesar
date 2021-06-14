@@ -16,16 +16,15 @@ You can use algorithm for crypting and encrypting message. Work of this based on
 
 This project requires at least python 3.9 and other.
 
-:white_check_mark:
-> mkdir caesar
+> :arrow_right: mkdir caesar
 
-> cd caesar
+> :arrow_right: cd caesar
 
-> git clone https://github.com/Luchia04/caesar.git
+> :arrow_right: git clone https://github.com/Luchia04/caesar.git
 
-> git checkout dev
+> :arrow_right: git checkout dev
 
-> python3 main.py
+> :arrow_right: python3 main.py
 
 ## Install requirements:
 
