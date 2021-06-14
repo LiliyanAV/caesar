@@ -45,3 +45,9 @@ This project requires at least python 3.9 and other.
 -------------
 
 > :arrow_right: pytest test_main.py
+
+### Setting pre-commit
+
+------------
+
+> :arrow_right: pre-commit install
