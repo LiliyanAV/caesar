@@ -16,6 +16,7 @@ You can use algorithm for crypting and encrypting message. Work of this based on
 
 This project requires at least python 3.9 and other.
 
+:white_check_mark:
 > mkdir caesar
 
 > cd caesar
