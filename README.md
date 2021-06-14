@@ -30,12 +30,12 @@ This project requires at least python 3.9 and other.
 
 ------------
 
-> python3 -m venv .venv
+> :arrow_right: python3 -m venv .venv
 
-> source .venv/bin/activate
+> :arrow_right: source .venv/bin/activate
 
-> pip install --upgrade pip
+> :arrow_right: pip install --upgrade pip
 
-> pip install -r requirements.txt
+> :arrow_right: pip install -r requirements.txt
 
-> python3 main.py
+> :arrow_right: python3 main.py
