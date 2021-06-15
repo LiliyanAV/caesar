@@ -9,18 +9,12 @@ class Caesar:
             return ch
         return chr((ord(ch) - ord("a") + self.shift) % self.size + ord("a"))
 
-    #  return (
-    #      chr((ord(ch) - ord("a") + self.shift) % self.size + ord("a"))
-    #    if ch in self.alphabet
-    #  else ch
-    #  )
-
     def crypt(self, text):
         text.lower()
         return "".join([self.crypt_chr(ch) for ch in text])
 
     def encrypt(self, encoded_text):
-        return self.crypt(self, encoded_text)
+        return self.crypt(encoded_text)
 
 
 if __name__ == "__main__":
