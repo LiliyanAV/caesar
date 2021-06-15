@@ -16,15 +16,11 @@ You can use algorithm for crypting and encrypting message. Work of this based on
 
 This project requires at least python 3.9 and other.
 
-> :arrow_right: mkdir caesar
+> :arrow_right: git clone https://github.com/Luchia04/caesar.git caesar
 
 > :arrow_right: cd caesar
 
-> :arrow_right: git clone https://github.com/Luchia04/caesar.git
-
 > :arrow_right: git checkout dev
-
-> :arrow_right: python3 main.py
 
 ### Install requirements:
 
@@ -37,6 +33,10 @@ This project requires at least python 3.9 and other.
 > :arrow_right: pip install --upgrade pip
 
 > :arrow_right: pip install -r requirements.txt
+
+> :arrow_right: python3 main.py
+
+### Run App
 
 > :arrow_right: python3 main.py
 
