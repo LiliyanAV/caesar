@@ -1,10 +1,18 @@
 from main import Caesar
+import pytest
 
 
-def test_crypt():
+@pytest.mark.parametrize(
+    "test_input, expected_output",
+    [
+        ("b arf", "o nes"),
+        ("b.arf", "o.nes"),
+        ("aaa*a**", "nnn*n**"),
+        ("aaa.)", "nnn.)"),
+        (".....//////nnnnn***", ".....//////aaaaa***"),
+    ],
+)
+def test_crypt_py(test_input, expected_output):
     c = Caesar()
-    assert c.crypt("b arf") == "o nes"
-    assert c.crypt("b.arf") == "o.nes"
-    assert c.crypt("aaa*a**") == "nnn*n**"
-    assert c.crypt("aaa.)") == "nnn.)"
-    assert c.crypt(".....//////nnnnn***") == ".....//////aaaaa***"
+    result = c.crypt(test_input)
+    assert result == expected_output
