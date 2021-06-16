@@ -1,5 +1,6 @@
-from main import Caesar
 import pytest
+
+from main import Caesar
 
 
 @pytest.mark.parametrize(
