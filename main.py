@@ -1,13 +1,30 @@
+class Alphabet:
+    def __init__(self, symbols):
+        self.symbols = symbols
+        self.size = len(self.symbols)
+
+    def chr_inside(self, ch):
+        return ch in self.symbols
+
+    def mess_classification(self, message):
+        f = False
+        for ch in message:
+            f = self.chr_inside(ch)
+            if f == True:
+                break
+        return f
+
+
 class Caesar:
-    def __init__(self, shift=13):
+    def __init__(self, alphabet, shift=13):
         self.shift = shift
-        self.alphabet = [chr(x) for x in range(ord("a"), ord("z") + 1)]
-        self.size = len(self.alphabet)
+        self.alphabet = alphabet
 
     def crypt_chr(self, ch):
-        if ch not in self.alphabet:
+        if ch not in self.alphabet.symbols:
             return ch
-        return chr((ord(ch) - ord("a") + self.shift) % self.size + ord("a"))
+        return chr((ord(ch) - ord(self.alphabet.symbols[0]) + self.shift) % self.alphabet.size
+                   + ord(self.alphabet.symbols[0]))
 
     def crypt(self, text):
         text.lower()
@@ -18,9 +35,12 @@ class Caesar:
 
 
 def user_input():
-
     while (input()):
         text = input("Enter the text: ")
+        if kir_alphabet.mess_classification(text):
+            c = Caesar(kir_alphabet)
+        else:
+            c = Caesar(lat_alphabet)
         ans = input("If you desire to crypt text then print CRYPT else ENCRYPT ")
         if ans == "CRYPT":
             print(c.crypt(text))
@@ -31,8 +51,13 @@ def user_input():
 
 
 if __name__ == "__main__":
-    c = Caesar()
-    words = ["th.e", "q.u..ick", "bro7wn", "fo-x", "ju*m*ps", "o-v#er", "t++he", "l;azy", "d$og", "b arf", "aa.a", "aaa.)",  ".....//////nnnnn***"]
+
+    lat_alphabet = Alphabet([chr(x) for x in range(ord("a"), ord("z") + 1)])
+    kir_alphabet = Alphabet([chr(x) for x in range(ord("а"), ord("я") + 1)])
+
+    c_ex = Caesar(lat_alphabet)
+    words = ["th.e", "q.u..ick", "bro7wn", "fo-x", "ju*m*ps", "o-v#er", "t++he", "l;azy", "d$og", "b arf", "aa.a",
+             "aaa.)", ".....//////nnnnn***"]
 
     ans = input("Do you want to use user input? YES or NO ")
     if ans == "YES":
@@ -41,6 +66,6 @@ if __name__ == "__main__":
         print("Some tests for example: ")
         for word in words:
             print("Initial word: " + word + "; Crypted word: "
-                  + c.crypt(word) +"; Encrypted word:" + c.encrypt(word))
+                  + c_ex.crypt(word) + "; Encrypted word:" + c_ex.encrypt(word))
     else:
         print("Wrong answer")
