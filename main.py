@@ -17,9 +17,34 @@ class Caesar:
         return self.crypt(encoded_text)
 
 
+def user_input():
+    f = True
+    while f:
+        print("Enter the text:")
+        text = input()
+        print("If you desire to crypt text then print CRYPT else ENCRYPT")
+        ans = input()
+        if ans == "CRYPT":
+            print(c.crypt(text))
+        elif ans == "ENCRYPT":
+            print(c.encrypt(text))
+        else:
+            print("wrong answer")
+        print("Do you want continue? print YES ")
+        f = input() == "YES"
+
 if __name__ == "__main__":
     c = Caesar()
-    print(c.crypt("b arf"))
-    print(c.crypt("aa.a"))
-    print(c.crypt("aaa.)"))
-    print(c.crypt(".....//////nnnnn***"))
+
+    print ("Do you want to use user input? YES or NO")
+    ans = input()
+    if ans == "YES":
+        user_input()
+    elif ans == "NO":
+        print("Some tests for example: ")
+        print(c.crypt("b arf"))
+        print(c.crypt("aa.a"))
+        print(c.crypt("aaa.)"))
+        print(c.crypt(".....//////nnnnn***"))
+    else:
+        print("Wrong answer")
