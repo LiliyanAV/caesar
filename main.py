@@ -30,8 +30,16 @@ class Caesar:
         text.lower()
         return "".join([self.crypt_chr(ch) for ch in text])
 
+    def encrypt_chr(self,ch):
+        if ch not in self.alphabet.symbols:
+            return ch
+        return chr( (ord(ch) - ord(self.alphabet.symbols[0]) - self.shift) % self.alphabet.size
+                   + ord(self.alphabet.symbols[0]))
+
     def encrypt(self, encoded_text):
-        return self.crypt(encoded_text)
+        encoded_text.lower()
+        return "".join([self.encrypt_chr(ch) for ch in encoded_text])
+
 
 
 def user_input():
@@ -54,6 +62,8 @@ if __name__ == "__main__":
 
     lat_alphabet = Alphabet([chr(x) for x in range(ord("a"), ord("z") + 1)])
     kir_alphabet = Alphabet([chr(x) for x in range(ord("а"), ord("я") + 1)])
+
+    ru = Caesar(kir_alphabet)
 
     c_ex = Caesar(lat_alphabet)
     words = ["th.e", "q.u..ick", "bro7wn", "fo-x", "ju*m*ps", "o-v#er", "t++he", "l;azy", "d$og", "b arf", "aa.a",
