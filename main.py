@@ -18,33 +18,29 @@ class Caesar:
 
 
 def user_input():
-    f = True
-    while f:
-        print("Enter the text:")
-        text = input()
-        print("If you desire to crypt text then print CRYPT else ENCRYPT")
-        ans = input()
+
+    while (input()):
+        text = input("Enter the text: ")
+        ans = input("If you desire to crypt text then print CRYPT else ENCRYPT ")
         if ans == "CRYPT":
             print(c.crypt(text))
         elif ans == "ENCRYPT":
             print(c.encrypt(text))
         else:
-            print("wrong answer")
-        print("Do you want continue? print YES ")
-        f = input() == "YES"
+            print("Wrong answer")
+
 
 if __name__ == "__main__":
     c = Caesar()
+    words = ["th.e", "q.u..ick", "bro7wn", "fo-x", "ju*m*ps", "o-v#er", "t++he", "l;azy", "d$og", "b arf", "aa.a", "aaa.)",  ".....//////nnnnn***"]
 
-    print ("Do you want to use user input? YES or NO")
-    ans = input()
+    ans = input("Do you want to use user input? YES or NO ")
     if ans == "YES":
         user_input()
     elif ans == "NO":
         print("Some tests for example: ")
-        print(c.crypt("b arf"))
-        print(c.crypt("aa.a"))
-        print(c.crypt("aaa.)"))
-        print(c.crypt(".....//////nnnnn***"))
+        for word in words:
+            print("Initial word: " + word + "; Crypted word: "
+                  + c.crypt(word) +"; Encrypted word:" + c.encrypt(word))
     else:
         print("Wrong answer")
