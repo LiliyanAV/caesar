@@ -44,10 +44,11 @@ class Caesar:
 def user_input():
     while input():
         text = input("Enter the text: ")
+        shift = int(input("Enter the shift: "))
         if kir_alphabet.mess_classification(text):
-            c = Caesar(kir_alphabet)
+            c = Caesar(kir_alphabet, shift)
         else:
-            c = Caesar(lat_alphabet)
+            c = Caesar(lat_alphabet, shift)
         ans = input("If you desire to crypt text then print CRYPT else ENCRYPT ")
         if ans == "CRYPT":
             print(c.crypt(text))
