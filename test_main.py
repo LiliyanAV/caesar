@@ -16,7 +16,7 @@ from main import Alphabet
 
     ],
 )
-def test_lat_crypt_py(test_input, expected_output):
+def test_cipher_eng(test_input, expected_output):
     lat_alphabet = Alphabet([chr(x) for x in range(ord("a"), ord("z") + 1)])
     c = Caesar(lat_alphabet)
     crypt_result = c.crypt(test_input)
@@ -36,7 +36,7 @@ def test_lat_crypt_py(test_input, expected_output):
 
     ],
 )
-def test_kir_crypt_py(test_input, expected_output):
+def test_cipher_rus(test_input, expected_output):
     kir_alphabet = Alphabet([chr(x) for x in range(ord("а"), ord("я") + 1)])
     c = Caesar(kir_alphabet)
     crypt_result = c.crypt(test_input)
