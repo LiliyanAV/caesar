@@ -21,7 +21,8 @@ def test_lat_crypt_py(test_input, expected_output):
     c = Caesar(lat_alphabet)
     crypt_result = c.crypt(test_input)
     encrypt_result = c.encrypt(expected_output)
-    assert crypt_result == expected_output and encrypt_result == test_input
+    assert crypt_result == expected_output
+    assert encrypt_result == test_input
 
 
 @pytest.mark.parametrize(
@@ -40,7 +41,8 @@ def test_kir_crypt_py(test_input, expected_output):
     c = Caesar(kir_alphabet)
     crypt_result = c.crypt(test_input)
     encrypt_result = c.encrypt(expected_output)
-    assert crypt_result == expected_output and encrypt_result == test_input
+    assert crypt_result == expected_output
+    assert encrypt_result == test_input
 
 
 
