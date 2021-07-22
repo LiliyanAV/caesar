@@ -44,7 +44,12 @@ class Caesar:
 def user_input():
     while input():
         text = input("Enter the text: ")
-        shift = int(input("Enter the shift: "))
+        try:
+            shift = int(input("Enter the shift: "))
+        except ValueError:
+            print("Wrong value, As meaning of shift will be use 13")
+            shift = 13
+
         if kir_alphabet.mess_classification(text):
             c = Caesar(kir_alphabet, shift)
         else:
