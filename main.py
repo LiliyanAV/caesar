@@ -10,7 +10,7 @@ class Alphabet:
         f = False
         for ch in message:
             f = self.chr_inside(ch)
-            if f == True:
+            if f:
                 break
         return f
 
@@ -30,10 +30,10 @@ class Caesar:
         text.lower()
         return "".join([self.crypt_chr(ch) for ch in text])
 
-    def encrypt_chr(self,ch):
+    def encrypt_chr(self, ch):
         if ch not in self.alphabet.symbols:
             return ch
-        return chr( (ord(ch) - ord(self.alphabet.symbols[0]) - self.shift) % self.alphabet.size
+        return chr((ord(ch) - ord(self.alphabet.symbols[0]) - self.shift) % self.alphabet.size
                    + ord(self.alphabet.symbols[0]))
 
     def encrypt(self, encoded_text):
@@ -41,9 +41,8 @@ class Caesar:
         return "".join([self.encrypt_chr(ch) for ch in encoded_text])
 
 
-
 def user_input():
-    while (input()):
+    while input():
         text = input("Enter the text: ")
         if kir_alphabet.mess_classification(text):
             c = Caesar(kir_alphabet)
