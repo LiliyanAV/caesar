@@ -1,7 +1,8 @@
 import pytest
 
 from main import Caesar
-from main import Alphabet
+from main import Message
+from main import Operation
 
 
 @pytest.mark.parametrize(
@@ -12,23 +13,34 @@ from main import Alphabet
         ("aaa*a**", "nnn*n**"),
         ("aaa.)", "nnn.)"),
         (".....//////nnnnn***", ".....//////aaaaa***"),
+        ("енот", "тъыя"),
+       ("месяц", "щтюмг"),
+       ("заяц", "фнмг"),
+       ("жизнь", "ухфъй"),
+       ("оывсивтбю", "ыипюхпяол")
 
 
     ],
 )
-def test_cipher_eng(test_input, expected_output):
-    lat_alphabet = Alphabet([chr(x) for x in range(ord("a"), ord("z") + 1)])
-    c = Caesar(lat_alphabet)
-    crypt_result = c.crypt(test_input)
-    encrypt_result = c.encrypt(expected_output)
-    assert crypt_result == expected_output
-    assert encrypt_result == test_input
+def test_crypt(test_input, expected_output):
+    msg = Message(test_input)
+    operation = Operation("CRYPT")
+    c = Caesar(msg)
+    result = c.text_handling(operation)
+    assert result == expected_output
+
+
 
 
 @pytest.mark.parametrize(
     "test_input, expected_output",
     [
-       ("енот", "тъыя"),
+        ("b arf", "o nes"),
+        ("b.arf", "o.nes"),
+        ("aaa*a**", "nnn*n**"),
+        ("aaa.)", "nnn.)"),
+        (".....//////nnnnn***", ".....//////aaaaa***"),
+        ("енот", "тъыя"),
        ("месяц", "щтюмг"),
        ("заяц", "фнмг"),
        ("жизнь", "ухфъй"),
@@ -36,13 +48,18 @@ def test_cipher_eng(test_input, expected_output):
 
     ],
 )
-def test_cipher_rus(test_input, expected_output):
-    kir_alphabet = Alphabet([chr(x) for x in range(ord("а"), ord("я") + 1)])
-    c = Caesar(kir_alphabet)
-    crypt_result = c.crypt(test_input)
-    encrypt_result = c.encrypt(expected_output)
-    assert crypt_result == expected_output
-    assert encrypt_result == test_input
+def test_encrypt(test_input, expected_output):
+    msg = Message(expected_output)
+    operation = Operation("ENCRYPT")
+    c = Caesar(msg)
+    result = c.text_handling(operation)
+    assert result == test_input
+
+
+
+
+
+
 
 
 

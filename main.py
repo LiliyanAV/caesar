@@ -1,76 +1,109 @@
-class Alphabet:
-    def __init__(self, symbols):
-        self.symbols = symbols
-        self.size = len(self.symbols)
+languages = {
+    'en': 'rus'
+}
 
-    def chr_inside(self, ch):
+alphabets = {
+    'en': [chr(x) for x in range(ord("a"), ord("z") + 1)],
+    'rus': [chr(x) for x in range(ord("а"), ord("я") + 1)]
+}
+
+
+class Alphabet:
+    def __init__(self, key):
+        if key in alphabets.keys():
+            self.symbols = alphabets[key]
+        else:
+            print("Could not recognize alphabet")
+
+    def __len__(self):
+        return len(self.symbols)
+
+    def chr_in(self, ch):
         return ch in self.symbols
 
-    def mess_classification(self, message):
-        f = False
-        for ch in message:
-            f = self.chr_inside(ch)
-            if f:
-                break
-        return f
+    def text_accessory(self, text):
+        for ch in text:
+            if self.chr_in(ch):
+                return True
+        return False
+
+
+def text_classification(text):
+    for key in alphabets.keys():
+        a = Alphabet(key)
+        if a.text_accessory(text):
+            return a
+
+
+class Message:
+    def __init__(self, text):
+        self.alphabet = text_classification(text)
+        self.text = text
+
+
+Operations = {"CRYPT",
+              "ENCRYPT"}
+
+
+class Operation:
+    def __init__(self, operation):
+        if operation in Operations:
+            self.value = operation
+        else:
+            print("Wrong kind of operation, CRYPT will be use as default")
+            self.value = "CRYPT"
+
+
+def mistake_handl(sh):
+    error = "Wrong value as default will be use 13"
+    try:
+        shift = int(sh)
+    except ValueError:
+        print(error)
+        shift = 13
+    else:
+        if shift <= 0:
+            print(error)
+            shift = 13
+
+    return shift
+
+
+class Shift:
+    def __init__(self, sh):
+        self.value = mistake_handl(sh)
 
 
 class Caesar:
-    def __init__(self, alphabet, shift=13):
-        self.shift = shift
-        self.alphabet = alphabet
+    def __init__(self, msg, shift = Shift(13)):
+        self.shift = shift.value
+        self.msg = msg
 
-    def crypt_chr(self, ch):
-        if ch not in self.alphabet.symbols:
-            return ch
-        return chr((ord(ch) - ord(self.alphabet.symbols[0]) + self.shift) % self.alphabet.size
-                   + ord(self.alphabet.symbols[0]))
+    def chr_shift(self, shift, ch):
+        if ch in self.msg.alphabet.symbols:
+            return chr((ord(ch) - ord(self.msg.alphabet.symbols[0]) + shift) % len(self.msg.alphabet)
+                       + ord(self.msg.alphabet.symbols[0]))
+        return ch
 
-    def crypt(self, text):
-        text.lower()
-        return "".join([self.crypt_chr(ch) for ch in text])
+    def answer_gen(self, shift):
+        return "".join([self.chr_shift(shift, ch) for ch in self.msg.text])
 
-    def encrypt_chr(self, ch):
-        if ch not in self.alphabet.symbols:
-            return ch
-        return chr((ord(ch) - ord(self.alphabet.symbols[0]) - self.shift) % self.alphabet.size
-                   + ord(self.alphabet.symbols[0]))
-
-    def encrypt(self, encoded_text):
-        encoded_text.lower()
-        return "".join([self.encrypt_chr(ch) for ch in encoded_text])
+    def text_handling(self, operation):
+        if operation.value == "CRYPT":
+            return self.answer_gen(self.shift)
+        return self.answer_gen(-self.shift)
 
 
 def user_input():
     while input():
-        text = input("Enter the text: ")
-        try:
-            shift = int(input("Enter the shift: "))
-        except ValueError:
-            print("Wrong value, As meaning of shift will be use 13")
-            shift = 13
-
-        if kir_alphabet.mess_classification(text):
-            c = Caesar(kir_alphabet, shift)
-        else:
-            c = Caesar(lat_alphabet, shift)
-        ans = input("If you desire to crypt text then print CRYPT else ENCRYPT ")
-        if ans == "CRYPT":
-            print(c.crypt(text))
-        elif ans == "ENCRYPT":
-            print(c.encrypt(text))
-        else:
-            print("Wrong answer")
+        msg = Message(input("Enter the text: "))
+        shift = Shift(input("Enter the shift: "))
+        operation = Operation(input("If you desire to crypt text then print CRYPT else ENCRYPT "))
+        c = Caesar(msg, shift)
+        print(c.text_handling(operation))
 
 
 if __name__ == "__main__":
-
-    lat_alphabet = Alphabet([chr(x) for x in range(ord("a"), ord("z") + 1)])
-    kir_alphabet = Alphabet([chr(x) for x in range(ord("а"), ord("я") + 1)])
-
-    ru = Caesar(kir_alphabet)
-
-    c_ex = Caesar(lat_alphabet)
     words = ["th.e", "q.u..ick", "bro7wn", "fo-x", "ju*m*ps", "o-v#er", "t++he", "l;azy", "d$og", "b arf", "aa.a",
              "aaa.)", ".....//////nnnnn***"]
 
@@ -80,7 +113,12 @@ if __name__ == "__main__":
     elif ans == "NO":
         print("Some tests for example: ")
         for word in words:
-            print("Initial word: " + word + "; Crypted word: "
-                  + c_ex.crypt(word) + "; Encrypted word:" + c_ex.encrypt(word))
+            msg = Message(word)
+            op_crypt = Operation("CRYPT")
+            op_encrypt = Operation("ENCRYPT")
+            c = Caesar(msg)
+
+            print("Initial word: " + word + "; Crypted word: " +
+                  c.text_handling(op_crypt) + "; Encrypted word:" + c.text_handling(op_encrypt))
     else:
-        print("Wrong answer")
+         print("Wrong answer")
