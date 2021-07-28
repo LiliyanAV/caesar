@@ -19,8 +19,8 @@ class Alphabet:
     def __contains__(self, item):
         return item in self.symbols
 
-    def __index__(self):
-        return self.symbols[0]
+    def __index__(self, index):
+        return self.symbols[index]
 
 
 def text_alphabet(alphabet, text):
@@ -59,32 +59,33 @@ def create_operation(str):
 
 
 class Shift:
-    def __init__(self):
-        self.value = 13
+    def __init__(self, value = 13):
+        self._value = value
 
-    @property
-    def set_value(self):
-        return self.value
+    def get_value(self):
+        return self._value
 
-    @set_value.setter
     def set_value(self, val):
         error = "Wrong value as default will be use 13"
         try:
-            self.value = int(val)
-            if self.value <= 0:
+            self._value = int(val)
+            if self._value <= 0:
                 raise ValueError
         except ValueError:
             print(error)
+            self._value = 13
+
+    temperature = property(get_value, set_value)
 
 
 class Caesar:
     def __init__(self, msg, shift=Shift()):
-        self.shift = shift.value
+        self.shift = shift.get_value
         self.msg = msg
 
     def chr_shift(self, shift, ch):
         if ch in self.msg.alphabet.symbols:
-            return chr((ord(ch) - ord(self.msg.alphabet.symbols[0]) + shift) % len(self.msg.alphabet)
+            return chr((ord(ch) - ord(self.msg.alphabet[0]) + shift) % len(self.msg.alphabet)
                        + ord(self.msg.alphabet[0]))
         return ch
 
@@ -101,7 +102,7 @@ def user_input():
     while input():
         msg = Message(input("Enter the text: "))
         shift = Shift()
-        shift.value = input("Enter the shift: ")
+        shift._value = input("Enter the shift: ")
         operation = create_operation(input("If you desire to crypt text then print CRYPT else ENCRYPT "))
         c = Caesar(msg, shift)
         print(c.text_handling(operation))
