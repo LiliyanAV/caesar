@@ -3,6 +3,7 @@ import pytest
 from main import Caesar
 from main import Message
 from main import Operation
+from main import create_operation
 
 
 @pytest.mark.parametrize(
@@ -12,7 +13,6 @@ from main import Operation
         ("b.arf", "o.nes"),
         ("aaa*a**", "nnn*n**"),
         ("aaa.)", "nnn.)"),
-        (".....//////nnnnn***", ".....//////aaaaa***"),
         ("енот", "тъыя"),
        ("месяц", "щтюмг"),
        ("заяц", "фнмг"),
@@ -24,7 +24,7 @@ from main import Operation
 )
 def test_crypt(test_input, expected_output):
     msg = Message(test_input)
-    operation = Operation("CRYPT")
+    operation = create_operation("CRYPT")
     c = Caesar(msg)
     result = c.text_handling(operation)
     assert result == expected_output
@@ -39,7 +39,6 @@ def test_crypt(test_input, expected_output):
         ("b.arf", "o.nes"),
         ("aaa*a**", "nnn*n**"),
         ("aaa.)", "nnn.)"),
-        (".....//////nnnnn***", ".....//////aaaaa***"),
         ("енот", "тъыя"),
        ("месяц", "щтюмг"),
        ("заяц", "фнмг"),
@@ -50,7 +49,7 @@ def test_crypt(test_input, expected_output):
 )
 def test_encrypt(test_input, expected_output):
     msg = Message(expected_output)
-    operation = Operation("ENCRYPT")
+    operation = create_operation("ENCRYPT")
     c = Caesar(msg)
     result = c.text_handling(operation)
     assert result == test_input
