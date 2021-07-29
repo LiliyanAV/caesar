@@ -50,7 +50,7 @@ class Operation(Enum):
 
 class Caesar:
     def __init__(self, msg, value=13):
-        self._shift = value
+        self._shift = self.set_shift(value)
         self.msg = msg
 
     def get_shift(self):
