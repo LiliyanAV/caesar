@@ -19,8 +19,8 @@ class Alphabet:
     def __contains__(self, item):
         return item in self.symbols
 
-    def __index__(self, index):
-        return self.symbols[index]
+    def get_first(self):
+        return self.symbols[0]
 
 
 def text_alphabet(alphabet, text):
@@ -48,45 +48,30 @@ class Operation(Enum):
     ENCRYPT = "ENCRYPT"
 
 
-def create_operation(str):
-    try:
-        op = Operation[str]
+class Caesar:
+    def __init__(self, msg, value=13):
+        self._shift = value
+        self.msg = msg
 
-    except KeyError:
-        print("Wrong kind of operation. CRYPT will be use")
-        op = Operation["CRYPT"]
-    return op
+    def get_shift(self):
+        return self._shift
 
-
-class Shift:
-    def __init__(self, value = 13):
-        self._value = value
-
-    def get_value(self):
-        return self._value
-
-    def set_value(self, val):
+    def set_shift(self, val):
         error = "Wrong value as default will be use 13"
         try:
-            self._value = int(val)
-            if self._value <= 0:
+            self._shift = int(val)
+            if self._shift <= 0:
                 raise ValueError
         except ValueError:
             print(error)
-            self._value = 13
+            self._shift = 13
 
-    temperature = property(get_value, set_value)
-
-
-class Caesar:
-    def __init__(self, msg, shift=Shift()):
-        self.shift = shift.get_value
-        self.msg = msg
+    shift = property(get_shift, set_shift)
 
     def chr_shift(self, shift, ch):
         if ch in self.msg.alphabet.symbols:
-            return chr((ord(ch) - ord(self.msg.alphabet[0]) + shift) % len(self.msg.alphabet)
-                       + ord(self.msg.alphabet[0]))
+            return chr((ord(ch) - ord(self.msg.alphabet.get_first()) + shift) % len(self.msg.alphabet)
+                       + ord(self.msg.alphabet.get_first()))
         return ch
 
     def text_shift(self, shift):
@@ -94,17 +79,21 @@ class Caesar:
 
     def text_handling(self, operation):
         if operation == Operation.CRYPT:
-            return self.text_shift(self.shift)
-        return self.text_shift(-self.shift)
+            return self.text_shift(self.get_shift())
+        return self.text_shift(-self.get_shift())
 
 
 def user_input():
     while input():
         msg = Message(input("Enter the text: "))
-        shift = Shift()
-        shift._value = input("Enter the shift: ")
-        operation = create_operation(input("If you desire to crypt text then print CRYPT else ENCRYPT "))
-        c = Caesar(msg, shift)
+        c = Caesar(msg)
+        c.shift = input("Enter the shift: ")
+        try:
+            operation = Operation(input("If you desire to crypt text then print CRYPT else ENCRYPT "))
+        except ValueError:
+            print("Wrong kind of operation. Crypt will be use as default")
+            operation = Operation["CRYPT"]
+
         print(c.text_handling(operation))
 
 
@@ -119,8 +108,8 @@ if __name__ == "__main__":
         print("Some tests for example: ")
         for word in words:
             msg = Message(word)
-            op_crypt = create_operation("CRYPT")
-            op_encrypt = create_operation("ENCRYPT")
+            op_crypt = Operation["CRYPT"]
+            op_encrypt = Operation["ENCRYPT"]
             c = Caesar(msg)
 
             print("Initial word: " + word + "; Crypted word: " +

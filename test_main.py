@@ -24,7 +24,7 @@ from main import create_operation
 )
 def test_crypt(test_input, expected_output):
     msg = Message(test_input)
-    operation = create_operation("CRYPT")
+    operation = Operation["CRYPT"]
     c = Caesar(msg)
     result = c.text_handling(operation)
     assert result == expected_output
@@ -49,7 +49,7 @@ def test_crypt(test_input, expected_output):
 )
 def test_encrypt(test_input, expected_output):
     msg = Message(expected_output)
-    operation = create_operation("ENCRYPT")
+    operation = Operation["ENCRYPT"]
     c = Caesar(msg)
     result = c.text_handling(operation)
     assert result == test_input
