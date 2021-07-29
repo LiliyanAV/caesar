@@ -49,24 +49,26 @@ class Operation(Enum):
 
 
 class Caesar:
-    def __init__(self, msg, value=13):
-        self._shift = self.set_shift(value)
+    def __init__(self, msg, shift=13):
+        self.shift = shift
         self.msg = msg
 
-    def get_shift(self):
-        return self._shift
+    shift = property()
 
-    def set_shift(self, val):
+    @shift.setter
+    def shift(self, value):
         error = "Wrong value as default will be use 13"
         try:
-            self._shift = int(val)
+            self._shift = int(value)
             if self._shift <= 0:
                 raise ValueError
         except ValueError:
-            print(error)
             self._shift = 13
+            print(error)
 
-    shift = property(get_shift, set_shift)
+    @shift.getter
+    def shift(self):
+        return self._shift
 
     def chr_shift(self, shift, ch):
         if ch in self.msg.alphabet.symbols:
@@ -74,13 +76,13 @@ class Caesar:
                        + ord(self.msg.alphabet.get_first()))
         return ch
 
-    def text_shift(self, shift):
+    def text_shift(self, shift) :
         return "".join([self.chr_shift(shift, ch) for ch in self.msg.text])
 
     def text_handling(self, operation):
         if operation == Operation.CRYPT:
-            return self.text_shift(self.get_shift())
-        return self.text_shift(-self.get_shift())
+            return self.text_shift(self.shift)
+        return self.text_shift(-self.shift)
 
 
 def user_input():
